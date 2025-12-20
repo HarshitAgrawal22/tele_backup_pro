@@ -1,3 +1,4 @@
+import 'package:backup_pro/pages/AudioPages/audio_file_screen.dart';
 import 'package:backup_pro/pages/folder_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,11 +21,22 @@ class FileManagerApp extends StatelessWidget {
             bottom: TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.image), text: 'Images'),
+                Tab(icon: Icon(Icons.music_note), text: 'Audio'),
                 // Tab(icon: Icon(Icons.music_note), text: 'Audio'),
               ],
             ),
           ),
-          body: TabBarView(children: [FolderListScreen()]),
+          body: TabBarView(
+            children: [
+              FolderListScreen(),
+              Builder(
+                builder: (context) {
+                  debugPrint('🟢 Audio tab widget built');
+                  return const AudioFolderListScreen();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
