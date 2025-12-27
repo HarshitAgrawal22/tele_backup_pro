@@ -18,11 +18,7 @@ class _BackupTaskHandler extends TaskHandler {
   @override
   Future<void> onStart(DateTime timestamp, SendPort? sendPort) async {
     debugPrint('🚀 Foreground backup started');
-    await FlutterForegroundTask.startService(
-      notificationTitle: 'Preparing backup',
-      notificationText: 'Waiting for Wi-Fi…',
-      callback: foregroundBackupCallback,
-    );
+
     if (!_scanned) {
       await MediaScanner.scanAndQueueAudios();
       _scanned = true;
@@ -44,6 +40,11 @@ class _BackupTaskHandler extends TaskHandler {
 
 Future<void> startForegroundBackup() async {
   debugPrint('▶️ Starting foreground backup service');
+  await FlutterForegroundTask.startService(
+    notificationTitle: 'Preparing backup',
+    notificationText: 'Waiting for Wi-Fi…',
+    callback: foregroundBackupCallback,
+  );
 }
 
 Future<void> stopForegroundBackup() async {
