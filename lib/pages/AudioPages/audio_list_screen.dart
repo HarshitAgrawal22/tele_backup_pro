@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:backup_pro/pages/Utils/backgroundScanner.dart';
+import 'package:backup_pro/pages/Utils/fore_ground_uploader.dart';
 import 'package:flutter/material.dart';
 
 class AudioFileScreen extends StatefulWidget {
@@ -103,9 +105,11 @@ class _AudioFileScreenState extends State<AudioFileScreen> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            onTap: () {
+            onTap: () async {
               // This is the EXACT path you will send to Raspberry Pi
               debugPrint('➡️ Selected audio: ${file.path}');
+              await MediaScanner.scanAndQueueAudios();
+              startForegroundBackup();
             },
           );
         },

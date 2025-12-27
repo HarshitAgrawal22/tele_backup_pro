@@ -26,11 +26,11 @@ class _AudioFolderListScreenState extends State<AudioFolderListScreen> {
   }
 
   Future<void> _scanAudioFolders() async {
-    final granted = await Permission.audio.request().isGranted;
-    if (!granted) {
-      debugPrint('❌ Audio permission denied');
-      return;
-    }
+    // final granted = await Permission.audio.request().isGranted;
+    // if (!granted) {
+    //   debugPrint('❌ Audio permission denied');
+    //   return;
+    // }
 
     const roots = [
       '/storage/emulated/0/Music',
